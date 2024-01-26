@@ -13,6 +13,6 @@ import org.springframework.validation.annotation.Validated;
 @Component
 public class AppEnvironmentVariables {
     @NotBlank
-    @Value("${ONLY_TEST}")
+    @Value("${ONLY_TEST}") // TIRAR do application.properties !!!!
     private String onlyTest; // REMOVER ISSO DEPOIS, claro...
 }
