@@ -22,7 +22,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 // Mudar isso tudo pq era do User !!
-@RequiredArgsConstructor // Usando o "RequiredArgsConstructor" faz INJETAR (Autowired) pelo CONSTRUCTOR da Classe!!!
+// ------------------------------------------
+// Usando o "RequiredArgsConstructor" faz INJETAR (Autowired) pelo CONSTRUCTOR da Classe, se estiver usando um "Stereotype"
+// como o "Service", por exemplo!!!
+@RequiredArgsConstructor
 @RestController
 public class SendEmailController implements IControllerWithArgument<EmailResponse, EmailDTO, Exception> {
     private final SendEmailUseCase sendEmailUseCase;

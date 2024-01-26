@@ -8,7 +8,9 @@ import com.ocsoares.awsemailsendingmicroservice.domain.entity.EmailDomainEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor // Usando o "RequiredArgsConstructor" faz INJETAR (Autowired) pelo CONSTRUCTOR da Classe!!!
+// Usando o "RequiredArgsConstructor" faz INJETAR (Autowired) pelo CONSTRUCTOR da Classe, se estiver usando um "Stereotype"
+// como o "Service", por exemplo!!!
+@RequiredArgsConstructor
 @Service
 public class SendEmailUseCase implements IUseCaseWithArgument<EmailResponse, EmailDomainEntity, Exception> {
     private final IEmailRepositoryGateway emailRepositoryGateway;
