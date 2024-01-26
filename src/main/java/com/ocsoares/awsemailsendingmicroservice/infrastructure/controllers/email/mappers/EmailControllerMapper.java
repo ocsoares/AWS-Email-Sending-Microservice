@@ -2,7 +2,9 @@ package com.ocsoares.awsemailsendingmicroservice.infrastructure.controllers.emai
 
 import com.ocsoares.awsemailsendingmicroservice.domain.entity.EmailDomainEntity;
 import com.ocsoares.awsemailsendingmicroservice.infrastructure.controllers.email.dtos.EmailDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EmailControllerMapper {
     public EmailDomainEntity toDomain(EmailDTO emailDTO) {
         return new EmailDomainEntity(emailDTO.name(), emailDTO.email(), emailDTO.password());

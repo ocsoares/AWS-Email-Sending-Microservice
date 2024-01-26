@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 // Mudar isso tudo pq era do User !!
+@RequiredArgsConstructor // Usando o "RequiredArgsConstructor" faz INJETAR (Autowired) pelo CONSTRUCTOR da Classe!!!
 @RestController
-@RequiredArgsConstructor
 public class SendEmailController implements IControllerWithArgument<EmailResponse, EmailDTO, Exception> {
     private final SendEmailUseCase sendEmailUseCase;
     private final EmailControllerMapper emailControllerMapper;

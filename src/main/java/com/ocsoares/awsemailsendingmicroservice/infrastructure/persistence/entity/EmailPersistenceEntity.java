@@ -22,9 +22,9 @@ public class EmailPersistenceEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "to_recipient")
     @NonNull
-    private String to;
+    private String toRecipient;
 
     @Column(nullable = false)
     @NonNull

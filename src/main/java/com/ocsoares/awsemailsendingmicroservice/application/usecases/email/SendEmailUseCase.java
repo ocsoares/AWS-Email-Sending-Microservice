@@ -5,13 +5,17 @@ import com.ocsoares.awsemailsendingmicroservice.application.usecases.interfaces.
 import com.ocsoares.awsemailsendingmicroservice.application.usecases.mapper.EmailUseCaseMapper;
 import com.ocsoares.awsemailsendingmicroservice.application.usecases.response.EmailResponse;
 import com.ocsoares.awsemailsendingmicroservice.domain.entity.EmailDomainEntity;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor // Usando o "RequiredArgsConstructor" faz INJETAR (Autowired) pelo CONSTRUCTOR da Classe!!!
+@Service
 public class SendEmailUseCase implements IUseCaseWithArgument<EmailResponse, EmailDomainEntity, Exception> {
-    private IEmailRepositoryGateway emailRepositoryGateway;
-    private EmailUseCaseMapper emailUseCaseMapper;
+    private final IEmailRepositoryGateway emailRepositoryGateway;
+    private final EmailUseCaseMapper emailUseCaseMapper;
 
     @Override
-    public EmailResponse execute(EmailDomainEntity parameter) throws Exception {
-        return null;
+    public EmailResponse execute(EmailDomainEntity emailDomainEntity) throws Exception {
+        return this.emailUseCaseMapper.toResponse(emailDomainEntity);
     }
 }
