@@ -5,28 +5,27 @@ import com.ocsoares.awsemailsendingmicroservice.domain.exceptions.response.Excep
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @RestControllerAdvice
 public class EmailExceptionHandler {
+    @ResponseStatus(HttpStatus.NOT_IMPLEMENTED)
+    @ResponseBody
     @ExceptionHandler(UnsupportedOperationException.class)
-    public ResponseEntity<ExceptionResponse> handleUnsupportedOperationException(
+    public ExceptionResponse handleUnsupportedOperationException(
             UnsupportedOperationException exception
     ) {
-        ExceptionResponse bodyResponse = new ExceptionResponse(exception.getMessage(),
-                HttpStatus.NOT_IMPLEMENTED.value()
-        );
-
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(bodyResponse);
+        return new ExceptionResponse(exception.getMessage(), HttpStatus.NOT_IMPLEMENTED.value());
     }
 
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
     @ExceptionHandler(SendEmailException.class)
-    public ResponseEntity<ExceptionResponse> handleSendEmailException(SendEmailException exception) {
-        var bodyResponse = new ExceptionResponse(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
-
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(bodyResponse);
+    public ExceptionResponse handleSendEmailException(SendEmailException exception) {
+        return new ExceptionResponse(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 }

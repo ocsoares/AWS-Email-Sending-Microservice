@@ -4,32 +4,31 @@ import com.ocsoares.awsemailsendingmicroservice.domain.exceptions.response.Excep
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @RestControllerAdvice
 public class HttpExceptionHandler {
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    @ResponseBody
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public ResponseEntity<ExceptionResponse> handleHttpRequestMethodNotSupportedException(
+    public ExceptionResponse handleHttpRequestMethodNotSupportedException(
             HttpRequestMethodNotSupportedException exception
     ) {
-        ExceptionResponse bodyResponse = new ExceptionResponse(exception.getMessage(),
-                HttpStatus.METHOD_NOT_ALLOWED.value()
-        );
-
-        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(bodyResponse);
+        return new ExceptionResponse(exception.getMessage(), HttpStatus.METHOD_NOT_ALLOWED.value());
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
     @ExceptionHandler(NoResourceFoundException.class)
-    public ResponseEntity<ExceptionResponse> handleNoResourceFoundException(
+    public ExceptionResponse handleNoResourceFoundException(
             NoResourceFoundException exception
     ) {
-        ExceptionResponse bodyResponse = new ExceptionResponse(exception.getMessage(), HttpStatus.NOT_FOUND.value());
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(bodyResponse);
+        return new ExceptionResponse(exception.getMessage(), HttpStatus.NOT_FOUND.value());
     }
 }
