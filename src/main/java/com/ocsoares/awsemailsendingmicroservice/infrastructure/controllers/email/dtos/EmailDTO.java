@@ -5,8 +5,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 // Mudar esse Schema e os Parâmetros pq tá do User!!!
-@Schema(example = "{\"name\":\"John Doe\",\"email\":\"johndoe@example.com\",\"password\":\"johndoe123\"}")
-public record EmailDTO(@NotBlank(message = "The name is required") String name,
-                       @NotBlank(message = "The email is required") @Email(message = "Must be a valid email address") String email,
-                       @NotBlank(message = "The password is required") String password) {
+@Schema(example = "{\"toRecipient\":\"johndoe@example.com\",\"subject\":\"Any subject\",\"body\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\"}")
+public record EmailDTO(
+        @NotBlank(message = "The toRecipient is required") @Email(message = "Must be a valid email address") String toRecipient,
+        @NotBlank(message = "The subject is required") String subject,
+        @NotBlank(message = "The body is required") String body) {
 }

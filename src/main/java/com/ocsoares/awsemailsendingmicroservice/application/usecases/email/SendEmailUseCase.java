@@ -1,6 +1,7 @@
 package com.ocsoares.awsemailsendingmicroservice.application.usecases.email;
 
 import com.ocsoares.awsemailsendingmicroservice.application.gateways.email.IEmailRepositoryGateway;
+import com.ocsoares.awsemailsendingmicroservice.application.gateways.email.IEmailServiceGateway;
 import com.ocsoares.awsemailsendingmicroservice.application.usecases.interfaces.IUseCaseWithArgument;
 import com.ocsoares.awsemailsendingmicroservice.application.usecases.mapper.EmailUseCaseMapper;
 import com.ocsoares.awsemailsendingmicroservice.application.usecases.response.EmailResponse;
@@ -14,10 +15,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class SendEmailUseCase implements IUseCaseWithArgument<EmailResponse, EmailDomainEntity, Exception> {
     private final IEmailRepositoryGateway emailRepositoryGateway;
+    private final IEmailServiceGateway emailServiceGateway;
     private final EmailUseCaseMapper emailUseCaseMapper;
 
     @Override
     public EmailResponse execute(EmailDomainEntity emailDomainEntity) throws Exception {
+        this.emailServiceGateway.sendEmail(emailDomainEntity);
+
         return this.emailUseCaseMapper.toResponse(emailDomainEntity);
     }
 }

@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmailControllerMapper {
     public EmailDomainEntity toDomain(EmailDTO emailDTO) {
-        return new EmailDomainEntity(emailDTO.name(), emailDTO.email(), emailDTO.password());
+        return new EmailDomainEntity(emailDTO.toRecipient(), emailDTO.subject(), emailDTO.body());
     }
 }
