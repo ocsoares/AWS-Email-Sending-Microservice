@@ -2,6 +2,8 @@ package com.ocsoares.awsemailsendingmicroservice.infrastructure.exceptions;
 
 import com.ocsoares.awsemailsendingmicroservice.domain.exceptions.response.ExceptionResponse;
 import com.ocsoares.awsemailsendingmicroservice.domain.exceptions.response.InvalidRequestBodyException;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.ArrayList;
 import java.util.List;
 
+@Order(Ordered.HIGHEST_PRECEDENCE)
 @RestControllerAdvice
 public class RequestBodyControllerHandler {
     @ExceptionHandler({HttpMediaTypeNotSupportedException.class, HttpMessageNotReadableException.class})
