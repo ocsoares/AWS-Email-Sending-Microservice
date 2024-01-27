@@ -11,7 +11,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-// Mudar isso tudo pq era do User !!
-// ------------------------------------------
 // Usando o "RequiredArgsConstructor" faz INJETAR (Autowired) pelo CONSTRUCTOR da Classe, se estiver usando um "Stereotype"
 // como o "Service", por exemplo!!!
 @RequiredArgsConstructor
@@ -33,12 +30,11 @@ public class SendEmailController implements IControllerWithArgument<EmailRespons
 
     @Override
     @Operation(summary = "Send an email", tags = "email")
-    @ApiResponse(responseCode = "201")
+    @ApiResponse(responseCode = "202")
     @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ExceptionResponse.class)))
     @ApiResponse(responseCode = "500")
-    @SecurityRequirement(name = "none")
     @PostMapping("email")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @Transactional
     public EmailResponse handle(@RequestBody @Valid EmailDTO emailDTO) throws Exception {
         EmailDomainEntity emailDomainEntity = this.emailControllerMapper.toDomain(emailDTO);
