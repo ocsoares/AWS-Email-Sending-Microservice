@@ -4,13 +4,14 @@ import com.ocsoares.awsemailsendingmicroservice.domain.entity.EmailDomainEntity;
 import com.ocsoares.awsemailsendingmicroservice.infrastructure.persistence.entity.EmailPersistenceEntity;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
 public class EmailPersistenceEntityMapper {
-    public EmailPersistenceEntity toPersistence(EmailDomainEntity emailDomainEntity) {
+    public EmailPersistenceEntity toPersistence(EmailDomainEntity emailDomainEntity, Boolean sent) {
         return new EmailPersistenceEntity(emailDomainEntity.toRecipient(), emailDomainEntity.subject(),
-                emailDomainEntity.body()
+                emailDomainEntity.body(), LocalDateTime.now(), sent
         );
     }
 

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -33,4 +34,12 @@ public class EmailPersistenceEntity implements Serializable {
     @Column(nullable = false)
     @NonNull
     private String body;
+
+    @Column(nullable = false, name = "send_date")
+    @NonNull
+    private LocalDateTime sendDate;
+
+    @Column(nullable = false)
+    @NonNull
+    private Boolean sent;
 }
