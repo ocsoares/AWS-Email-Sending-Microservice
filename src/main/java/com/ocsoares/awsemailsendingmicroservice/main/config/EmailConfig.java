@@ -27,8 +27,9 @@ public class EmailConfig {
 
     @Bean
     public IEmailServiceGateway emailServiceGateway(
-            AmazonSimpleEmailService amazonSimpleEmailService, AppEnvironmentVariables appEnvironmentVariables
+            AmazonSimpleEmailService amazonSimpleEmailService, IEmailRepositoryGateway emailRepositoryGateway,
+            AppEnvironmentVariables appEnvironmentVariables
     ) {
-        return new AwsSesServiceGateway(amazonSimpleEmailService, appEnvironmentVariables);
+        return new AwsSesServiceGateway(amazonSimpleEmailService, emailRepositoryGateway, appEnvironmentVariables);
     }
 }
