@@ -3,15 +3,20 @@ package com.ocsoares.awsemailsendingmicroservice.infrastructure.gateways.email.a
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.model.*;
+import com.ocsoares.awsemailsendingmicroservice.application.gateways.email.IEmailRepositoryGateway;
 import com.ocsoares.awsemailsendingmicroservice.application.gateways.email.IEmailServiceGateway;
 import com.ocsoares.awsemailsendingmicroservice.domain.entity.EmailDomainEntity;
 import com.ocsoares.awsemailsendingmicroservice.domain.exceptions.email.SendEmailException;
 import com.ocsoares.awsemailsendingmicroservice.main.config.AppEnvironmentVariables;
 import lombok.RequiredArgsConstructor;
 
+// Tá Enviando APENAS para o PRÓPRIO EMAIL, fazer para Enviar para QUALQUER EMAIL!!
+// ----------------------------------------------------------------------------------------------
+// ADICIONAR FILAS no AWS SQS !!!!
 @RequiredArgsConstructor
 public class AwsSesServiceGateway implements IEmailServiceGateway {
     private final AmazonSimpleEmailService amazonSimpleEmailService;
+    private final IEmailRepositoryGateway emailRepositoryGateway;
     private final AppEnvironmentVariables appEnvironmentVariables;
 
     @Override
@@ -23,7 +28,9 @@ public class AwsSesServiceGateway implements IEmailServiceGateway {
 
         try {
             this.amazonSimpleEmailService.sendEmail(sendEmailRequest);
+            this.emailRepositoryGateway.saveEmail(emailDomainEntity, true);
         } catch (AmazonServiceException exception) {
+            this.emailRepositoryGateway.saveEmail(emailDomainEntity, false);
             throw new SendEmailException();
         }
     }
