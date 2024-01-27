@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-// Mudei os Parâmetros do User para o Email só para PARAR de dar Erro
-// OBS: Mas ainda NÃO SEI o EmailResponse q vou por...
 @Component
 public class EmailUseCaseMapper {
     public EmailResponse toResponse(EmailDomainEntity emailDomainEntity) {
