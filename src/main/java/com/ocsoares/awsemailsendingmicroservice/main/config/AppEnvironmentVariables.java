@@ -29,4 +29,20 @@ public class AppEnvironmentVariables {
     @NotBlank
     @Value("${AWS_SNS_TOPIC_ARN}")
     private String awsSnsTopicArn;
+
+    @NotBlank
+    @Value("${MAIL_HOST}")
+    private String mailHost;
+
+    @NotBlank
+    @Value("${MAIL_PORT}")
+    private String mailPort;
+    
+    @NotBlank
+    @Value("${MAIL_USERNAME}")
+    private String mailUsername;
+
+    @NotBlank
+    @Value("${MAIL_PASSWORD}")
+    private String mailPassword;
 }

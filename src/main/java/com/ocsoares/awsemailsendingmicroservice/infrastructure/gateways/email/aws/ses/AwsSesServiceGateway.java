@@ -10,7 +10,7 @@ import com.ocsoares.awsemailsendingmicroservice.domain.exceptions.email.SendEmai
 import com.ocsoares.awsemailsendingmicroservice.main.config.AppEnvironmentVariables;
 import lombok.RequiredArgsConstructor;
 
-// Tá Enviando APENAS para o PRÓPRIO EMAIL, fazer para Enviar para QUALQUER EMAIL!!
+// Usando esse, só é possível Enviar para o PRÓPRIO Email registrado na AWS, porque é para TESTES!!!
 @RequiredArgsConstructor
 public class AwsSesServiceGateway implements IEmailServiceGateway {
     private final AmazonSimpleEmailService amazonSimpleEmailService;
