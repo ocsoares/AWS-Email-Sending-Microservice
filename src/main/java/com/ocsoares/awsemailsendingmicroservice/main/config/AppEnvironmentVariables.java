@@ -25,4 +25,8 @@ public class AppEnvironmentVariables {
     @NotBlank
     @Value("${AWS_SECRET_KEY}")
     private String awsSecretKey;
+
+    @NotBlank
+    @Value("${AWS_SNS_TOPIC_ARN}")
+    private String awsSnsTopicArn;
 }
