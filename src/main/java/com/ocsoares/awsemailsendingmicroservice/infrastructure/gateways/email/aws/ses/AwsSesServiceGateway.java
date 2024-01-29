@@ -11,8 +11,6 @@ import com.ocsoares.awsemailsendingmicroservice.main.config.AppEnvironmentVariab
 import lombok.RequiredArgsConstructor;
 
 // Tá Enviando APENAS para o PRÓPRIO EMAIL, fazer para Enviar para QUALQUER EMAIL!!
-// ----------------------------------------------------------------------------------------------
-// ADICIONAR FILAS no AWS SQS !!!!
 @RequiredArgsConstructor
 public class AwsSesServiceGateway implements IEmailServiceGateway {
     private final AmazonSimpleEmailService amazonSimpleEmailService;
