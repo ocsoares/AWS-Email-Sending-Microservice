@@ -1,6 +1,7 @@
 package com.ocsoares.awsemailsendingmicroservice.utils;
 
 import com.ocsoares.awsemailsendingmicroservice.domain.entity.EmailDomainEntity;
+import com.ocsoares.awsemailsendingmicroservice.infrastructure.controllers.email.dtos.EmailDTO;
 import com.ocsoares.awsemailsendingmicroservice.main.config.AppEnvironmentVariables;
 import org.springframework.mail.SimpleMailMessage;
 
@@ -13,6 +14,10 @@ public class TestUtils {
 
     public static String createSqsMessage() {
         return "toRecipient=johndoe@gmail.com, subject=An email to John Doe, body=Hello John Doe !";
+    }
+
+    public static EmailDTO createEmailDTO() {
+        return new EmailDTO("johndoe@gmail.com", "An email to John Doe", "Hello John Doe !");
     }
 
     public static SimpleMailMessage createSimpleMailMessage() {
