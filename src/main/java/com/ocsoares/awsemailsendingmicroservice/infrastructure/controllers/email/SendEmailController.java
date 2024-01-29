@@ -1,11 +1,9 @@
 package com.ocsoares.awsemailsendingmicroservice.infrastructure.controllers.email;
 
-import com.ocsoares.awsemailsendingmicroservice.application.usecases.email.SendEmailUseCase;
-import com.ocsoares.awsemailsendingmicroservice.application.usecases.response.EmailResponse;
-import com.ocsoares.awsemailsendingmicroservice.domain.entity.EmailDomainEntity;
+import com.amazonaws.services.sns.AmazonSNS;
+import com.amazonaws.services.sns.model.Topic;
 import com.ocsoares.awsemailsendingmicroservice.domain.exceptions.response.ExceptionResponse;
 import com.ocsoares.awsemailsendingmicroservice.infrastructure.controllers.email.dtos.EmailDTO;
-import com.ocsoares.awsemailsendingmicroservice.infrastructure.controllers.email.mappers.EmailControllerMapper;
 import com.ocsoares.awsemailsendingmicroservice.infrastructure.controllers.interfaces.IControllerWithArgument;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -14,7 +12,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -24,9 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 // como o "Service", por exemplo!!!
 @RequiredArgsConstructor
 @RestController
-public class SendEmailController implements IControllerWithArgument<EmailResponse, EmailDTO, Exception> {
-    private final SendEmailUseCase sendEmailUseCase;
-    private final EmailControllerMapper emailControllerMapper;
+public class SendEmailController implements IControllerWithArgument<Void, EmailDTO, Exception> {
+    private final AmazonSNS amazonSNS;
+    private final Topic snsCatalogTopic;
 
     @Override
     @Operation(summary = "Send an email", tags = "email")
@@ -35,10 +32,9 @@ public class SendEmailController implements IControllerWithArgument<EmailRespons
     @ApiResponse(responseCode = "500")
     @PostMapping("email")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @Transactional
-    public EmailResponse handle(@RequestBody @Valid EmailDTO emailDTO) throws Exception {
-        EmailDomainEntity emailDomainEntity = this.emailControllerMapper.toDomain(emailDTO);
+    public Void handle(@RequestBody @Valid EmailDTO emailDTO) {
+        this.amazonSNS.publish(this.snsCatalogTopic.getTopicArn(), emailDTO.toString());
 
-        return this.sendEmailUseCase.execute(emailDomainEntity);
+        return null;
     }
 }
