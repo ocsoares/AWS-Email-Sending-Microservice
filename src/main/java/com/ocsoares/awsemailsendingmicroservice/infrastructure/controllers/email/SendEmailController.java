@@ -2,12 +2,10 @@ package com.ocsoares.awsemailsendingmicroservice.infrastructure.controllers.emai
 
 import com.amazonaws.services.sns.AmazonSNS;
 import com.amazonaws.services.sns.model.Topic;
-import com.ocsoares.awsemailsendingmicroservice.domain.exceptions.response.ExceptionResponse;
 import com.ocsoares.awsemailsendingmicroservice.infrastructure.controllers.email.dtos.EmailDTO;
 import com.ocsoares.awsemailsendingmicroservice.infrastructure.controllers.interfaces.IControllerWithArgument;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +26,7 @@ public class SendEmailController implements IControllerWithArgument<Void, EmailD
     @Override
     @Operation(summary = "Send an email", tags = "email")
     @ApiResponse(responseCode = "202")
-    @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ExceptionResponse.class)))
+    @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
     @ApiResponse(responseCode = "500")
     @PostMapping("email")
     @ResponseStatus(HttpStatus.ACCEPTED)
