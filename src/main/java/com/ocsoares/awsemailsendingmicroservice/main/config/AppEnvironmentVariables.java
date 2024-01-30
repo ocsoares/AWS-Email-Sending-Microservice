@@ -11,6 +11,22 @@ import org.springframework.validation.annotation.Validated;
 @Component
 public class AppEnvironmentVariables {
     @NotBlank
+    @Value("${DB_NAME}")
+    private String dbName;
+
+    @NotBlank
+    @Value("${DB_URL}")
+    private String dbUrl;
+
+    @NotBlank
+    @Value("${DB_USER}")
+    private String dbUser;
+
+    @NotBlank
+    @Value("${DB_PASSWORD}")
+    private String dbPassword;
+
+    @NotBlank
     @Value("${EMAIL_SOURCE}")
     private String emailSource;
 
@@ -37,7 +53,7 @@ public class AppEnvironmentVariables {
     @NotBlank
     @Value("${MAIL_PORT}")
     private String mailPort;
-    
+
     @NotBlank
     @Value("${MAIL_USERNAME}")
     private String mailUsername;
