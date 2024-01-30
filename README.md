@@ -31,7 +31,7 @@ principal. Porém, foi implementado os **testes unitários** em todo o projeto.
 
 ### Pastas
 
-![Pastas do Publish e Consumer](https://raw.githubusercontent.com/ocsoares/images/master/aws-email-sending-microservice/folder-publish-consumer.jpg)
+![Pastas do Publish e Consumer](https://raw.githubusercontent.com/ocsoares/images/master/aws-email-sending-microservice/folder-publish-consumer.png)
 
 ### Trechos de códigos
 
@@ -41,11 +41,23 @@ principal. Porém, foi implementado os **testes unitários** em todo o projeto.
 
 ### Consumer
 
-![Trecho de código do Consumer](https://raw.githubusercontent.com/ocsoares/images/master/aws-email-sending-microservice/consumer-code-snippet.jpg)
+![Trecho de código do Consumer](https://raw.githubusercontent.com/ocsoares/images/master/aws-email-sending-microservice/consumer-code-snippet.png)
 
 ## AWS SQS Queues
 
-![AWS SQS Queues](https://raw.githubusercontent.com/ocsoares/images/master/aws-email-sending-microservice/aws-sqs-queues.jpg)
+![AWS SQS Queues](https://raw.githubusercontent.com/ocsoares/images/master/aws-email-sending-microservice/aws-sqs-queues.png)
+
+## Testes
+
+### Trechos de códigos
+
+### Javamail
+
+![Teste do Javamail](https://raw.githubusercontent.com/ocsoares/images/master/aws-email-sending-microservice/javamail-test.png)
+
+### AWS SQS Consumer
+
+![Teste do AWS SQS Consumer](https://raw.githubusercontent.com/ocsoares/images/master/aws-email-sending-microservice/aws-sqs-consumer-test.png)
 
 # Principais tecnologias e bibliotecas utilizadas
 
