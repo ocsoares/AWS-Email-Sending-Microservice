@@ -43,6 +43,10 @@ principal. Porém, foi implementado os **testes unitários** em todo o projeto.
 
 ![Trecho de código do Consumer](https://raw.githubusercontent.com/ocsoares/images/master/aws-email-sending-microservice/consumer-code-snippet.png)
 
+### Javamail service
+
+![Trecho de código do Javamail service](https://raw.githubusercontent.com/ocsoares/images/master/aws-email-sending-microservice/javamail-service.png)
+
 ## AWS SQS Queues
 
 ![AWS SQS Queues](https://raw.githubusercontent.com/ocsoares/images/master/aws-email-sending-microservice/aws-sqs-queues.png)
